@@ -1,0 +1,36 @@
+KRUSKAL_MST(Graph G):
+    Sort edges in G by increasing weight
+    MAKE-SETS(G's vertices)
+    MST_Weight = 0
+
+    For each edge (u, v) in sorted edges:
+        If FIND_SET(u) ≠ FIND_SET(v):
+            Add edge (u, v) to MST
+            MST_Weight += edge weight
+            UNION(u, v) 
+
+    Return MST_Weight
+
+MAKE_SETS(n)
+    initialize Parent[] and Rank[] arrays for n vertices
+    for each i from 0 to n-1
+    	Parent[i] = i
+    	Rank[i] = 0
+    	
+  
+FIND_SET(u):
+    If u != Parent[u]:
+        Parent[u] = FIND_SET(Parent[u]) 
+    Return Parent[u]
+
+
+UNION(x, y):
+    RootX = FIND_SET(x)
+    RootY = FIND_SET(y)
+
+    If Rank[RootX] > Rank[RootY]:
+        Parent[RootY] = RootX
+    Else:
+        Parent[RootX] = RootY
+        If Rank[RootX] = Rank[RootY]:
+            Rank[RootY] += 1 
