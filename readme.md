@@ -30,14 +30,5 @@ make clean
 ./kruskal
 ```
 
-### Example Input
-You will be prompted to input the number of edges, followed by the edges (with weights).
-
-### Example Output
-The program will display the edges of the MST.
-
-## License
-This project is open-source and available under the MIT License.
-```
-
-You can now copy and paste this content into your `README.md` file. Let me know if you need anything else!
+### Input 
+To change the input go to kruskals.cpp main function.
