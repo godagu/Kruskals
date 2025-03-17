@@ -12,7 +12,9 @@ struct Graph{
     vector<pair<int, verticePair>> edges; 
     Graph(int V, int E);
     void addEdge(int u, int v, int w);
-    int kruskalMST();
+
+    // k argument is for k-clusterization. if not specified, it assumes an MST needs to be found
+    int kruskalMST(int k = 1);
 };
 
 // dijoint sets structure for implementing kruskal's algorithm

@@ -10,6 +10,8 @@ void Graph::addEdge(int u, int v, int w){
     edges.push_back({w, {u, v}});
 }
 
+
+// make-set
 DisjointSets::DisjointSets(int n){
     this->n = n;
 
@@ -87,7 +89,14 @@ void DisjointSets::printSets(){
 
 }
 
-int Graph::kruskalMST(){
+int Graph::kruskalMST(int k){
+    // check for k - klusters that k would not exceed the amount of vertices in the graph
+    if(k < 1 || k > this->V){
+        cout << "Invalid cluster size \n" << endl; 
+    }
+
+    bool clustering = (k == 1 ? false : true);
+  
     // initialize weight
     int mst_weight = 0;
 
@@ -123,7 +132,6 @@ int Graph::kruskalMST(){
 
         // if they are not from the same set (dont have the same parent)
         if(set_u != set_v){
-            // print vertices
 
             // add the edge to mst (increase the final weigth)
             mst_weight += it->first;
@@ -137,6 +145,7 @@ int Graph::kruskalMST(){
             cout << "Set " << v << ": " << disjoined_sets.findSet(v) << "\n";
             cout << "----------------------------\n";
 
+          
             // stop if there's only one set left (MST found)
             unordered_map<int, vector<int>> sets;
             for (int i = 0; i < V; ++i) {
@@ -146,6 +155,14 @@ int Graph::kruskalMST(){
             if (sets.size() == 1) {
                 cout << "Only one disjoint set remains, MST found!" << endl;
                 break;
+            }
+
+            if(clustering){
+                if (static_cast<int>(sets.size()) == k) {
+                    cout << k << "-clustering found." << endl;
+                    mst_weight = 0;
+                    break;
+                }
             }
 
         }
@@ -183,9 +200,12 @@ int main(){
     g.addEdge(7, 8, 13);
     g.addEdge(9, 10, 7);
 
-    int mst_wt = g.kruskalMST(); 
+    int mst_wt = g.kruskalMST(3); 
+ 
+    if(mst_wt != 0){
+            cout << "\nWeight of MST is " << mst_wt << "\n"; 
+    }
   
-    cout << "\nWeight of MST is " << mst_wt << "\n"; 
   
     return 0; 
 }

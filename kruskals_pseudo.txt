@@ -1,13 +1,19 @@
-KRUSKAL_MST(Graph G):
+KRUSKAL_MST(Graph G, int k):
     Sort edges in G by increasing weight
     MAKE-SETS(G's vertices)
     MST_Weight = 0
-
+    
+    Sets_count = v
     For each edge (u, v) in sorted edges:
         If FIND_SET(u) ≠ FIND_SET(v):
+            If sets_count == k
+            	stop (k clusters have been formed)
+            	
             Add edge (u, v) to MST
             MST_Weight += edge weight
-            UNION(u, v) 
+            UNION(u, v)
+            sets_count -= 1
+            
 
     Return MST_Weight
 
